@@ -1,0 +1,79 @@
+###W06-W1_parta_start_md
+The optimisation problem can be written as
+\begin{align*}
+\max_{x} c^T x & \\
+\text{such that} & \\
+A_{ub} x &\le b_{ub} \\
+l \le x & \le u
+\end{align*}
+where $x=[A, B]$ is the vector of the quantities of albatrosses and bears, $A_{ub}$ is the inequality constraint matrix, $b_{ub}$ is the right hand side of the inequality constraints, and $l$ and $u$ are the lower and upper boundaries of $x$, respectively.
+
+The vector $c$ is given by
+$$c = \begin{bmatrix}
+-2 \\
+-1
+\end{bmatrix},
+$$
+the inequality constraint matrix is given by
+$$A_{ub} = 
+\begin{bmatrix}
+1 & 3 \\
+2 & 1
+\end{bmatrix}, 
+$$
+the right hand side is given by
+$$b_{ub} = \begin{bmatrix}
+9 \\
+8
+\end{bmatrix},
+$$
+and the lower bounds are both 0 while the upper bounds aren't defined.
+
+###W06-W1_parta_switch_py
+import numpy as np
+import matplotlib.pyplot as plt
+
+xx = np.linspace(0, 4.5)
+y_stitch = 3 - 1/3 * xx
+y_stuff = 8 - 2*xx
+
+# Corners of the feasible region
+x = [0, 0, 3, 4]
+y = [0, 3, 2, 0]
+plt.fill(x, y, "c")
+plt.text(0.75, 1, "Feasible region", color='black',fontsize=18)
+
+plt.plot(xx, y_stitch, "b")
+plt.text(0.5, 3, "Stitching constraint", color='black',fontsize=14, rotation=-18, rotation_mode='anchor',
+              transform_rotates_text=True)
+
+plt.plot(xx, y_stuff, "r")
+plt.text(2.05, 4.2, "Stuffing constraint", color='black',fontsize=14, rotation=-63, rotation_mode='anchor',
+              transform_rotates_text=True)
+
+plt.xlabel("Albatrosses", fontsize="16")
+plt.ylabel("Bears", fontsize="16")
+plt.xlim([0, 4.5])
+plt.ylim([0, 4.5])
+plt.show()
+###W06-W1_parta_end
+
+
+###W06-W1_partc_start_py
+# We need to use negative values because we want to maximise the profit
+c = [-2, -1]
+
+# Array with the parameters for inequality constraint matrix
+A = [[1, 3], [2, 1]]
+
+# Right hand side of the inequality constraints
+b = [9, 8]
+
+# Bounds for the number of toys
+x0_bounds = (0, None)
+x1_bounds = (0, None)
+
+# Use scipy.optimize.linprog to solve the optimisation
+from scipy.optimize import linprog
+res = linprog(c, A_ub=A, b_ub=b, bounds=[x0_bounds, x1_bounds])
+###W06-W1_partc_end
