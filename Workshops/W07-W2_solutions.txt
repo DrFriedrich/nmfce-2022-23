@@ -34,5 +34,5 @@ x0 = [0, 0, 0]
 
 res = minimize(problem_d, x0, method='Nelder-Mead', tol=1e-6)
 print(res)
-print("Function value {}".format(-problem_d(res.x)))
+print("Function value {}".format(problem_d(res.x)))
 ###W07-W2_partd_end
