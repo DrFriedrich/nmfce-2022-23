@@ -1,0 +1,38 @@
+###W07-W2_partb_start_py
+def problem_b(x):
+    """Problem formulation"""
+    return -(126*x[0] - 9*x[0]**2 + 182*x[1] - 13*x[1]**2)
+
+from scipy.optimize import minimize
+x0 = [0, 0]
+
+res = minimize(problem_b, x0, method='Nelder-Mead', tol=1e-6)
+print(res)
+print("Function value {}".format(-problem_b(res.x)))
+###W07-W2_partb_end
+
+###W07-W2_partc_start_py
+def problem_c(x):
+    """Problem formulation"""
+    return -(54*x[0] - 9*x[0]**2 + 78*x[1] - 13*x[1]**2)
+
+from scipy.optimize import minimize
+x0 = [0, 0]
+
+res = minimize(problem_c, x0, method='Nelder-Mead', tol=1e-6)
+print(res)
+print("Function value {}".format(-problem_c(res.x)))
+###W07-W2_partc_end
+
+###W07-W2_partd_start_py
+def problem_d(x):
+    """Problem formulation"""
+    return (x[0]**2 + x[0]*(1-x[1]) + x[1]**2 - x[1]*x[2] + x[2]**2 + x[2])
+            
+from scipy.optimize import minimize
+x0 = [0, 0, 0]
+
+res = minimize(problem_d, x0, method='Nelder-Mead', tol=1e-6)
+print(res)
+print("Function value {}".format(-problem_d(res.x)))
+###W07-W2_partd_end
